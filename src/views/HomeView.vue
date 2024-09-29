@@ -15,8 +15,8 @@ import menu from "./menu.json";
             :to="{
               name: routerInfo.detail.name,
               params: {
-                dirname: item.title,
-                filename: link
+                dir_index: item.title.substring(0, 2),
+                file_index: link.substring(0, 2)
               }
             }"
           >

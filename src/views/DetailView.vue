@@ -1,12 +1,15 @@
 <script lang="ts" setup>
 import { marked } from "marked";
 import { onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import menu from "./menu.json";
+import { routerInfo } from "@/router";
 
 const route = useRoute();
+const router = useRouter();
 
-const dirname = route.params.dirname;
-const filename = route.params.filename;
+const dirIndex = route.params.dir_index;
+const fileIndex = route.params.file_index;
 
 const markdownContent = ref<string>();
 const parsedMarkdown = ref<string>();
@@ -22,7 +25,19 @@ async function loadMarkdownFile(filePath: string) {
   }
 }
 onMounted(() => {
-  loadMarkdownFile(`/${dirname}/${filename}`);
+  const dir = menu.find((item) => item.title.startsWith(dirIndex as string));
+  if (!dir) {
+    router.replace({ name: routerInfo.home.name });
+    return;
+  }
+  const filename = dir.links.find((item) =>
+    item.startsWith(fileIndex as string)
+  );
+  if (!filename) {
+    router.replace({ name: routerInfo.home.name });
+    return;
+  }
+  loadMarkdownFile(`/documents/${dir.title}/${filename}`);
 });
 </script>
 <template>

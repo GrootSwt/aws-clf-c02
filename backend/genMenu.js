@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const publicDir = join(__dirname, "../public");
+const publicDir = join(__dirname, "../public/documents");
 
 const menu = [];
 

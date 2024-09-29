@@ -12,7 +12,7 @@ export const routerInfo = {
   },
   detail: {
     name: "detail",
-    path: "/detail/:dirname/:filename",
+    path: "/detail/:dir_index/:file_index",
     component: DetailView
   }
 } as const;

@@ -1,5 +1,11 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import VRouterLink from "@/components/VRouterLink.vue";
+import { routerInfo } from "@/router";
+</script>
 <template>
-  <h1>Not Found View</h1>
+  <section class="flex flex-col justify-center items-center h-dvh">
+    <h1>Not Found View</h1>
+    <VRouterLink :to="{ name: routerInfo.home.name }" replace>Home</VRouterLink>
+  </section>
 </template>
 <style lang="scss" scoped></style>

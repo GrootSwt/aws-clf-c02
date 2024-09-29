@@ -8,13 +8,13 @@ defineProps<RouterLinkProps>();
     v-if="typeof to === 'string' && to.startsWith('http')"
     :href="to"
     target="_blank"
-    class="inline-block bg-gray-100 no-underline px-2 py-1 rounded text-black"
+    class="inline-block bg-sky-50 no-underline px-3 py-1 rounded text-gray-600"
   >
     <slot />
   </a>
   <RouterLink
     v-bind="$props"
-    class="inline-block bg-sky-50 no-underline px-3 py-1 rounded text-gray-600"
+    class="inline-block bg-sky-50 no-underline px-3 py-1 rounded text-gray-600 hover:text-black active:text-blue-600 visited:text-purple-600"
   >
     <slot />
   </RouterLink>

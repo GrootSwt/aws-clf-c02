@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port=40011",
     "build": "node backend/genMenu.js && vue-tsc -b && vite build",
+    "build:local": "yarn build && rm -rf /Users/swt/Dev/Softwares/docker/nginx/html/aws-clf-c02/* && cp -r ./dist/* /Users/swt/Dev/Softwares/docker/nginx/html/aws-clf-c02/",
     "preview": "vite preview",
     "gen-menu": "node backend/genMenu.js"
   },

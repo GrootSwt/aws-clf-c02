@@ -2,7 +2,7 @@
 import { computed, StyleValue } from "vue";
 
 type Props = {
-  raw: string;
+  icon: string;
   size?: string | number;
   color?: string;
 };
@@ -20,7 +20,7 @@ const style = computed<StyleValue>(() => {
 });
 </script>
 <template>
-  <i class="svg-box" :style="style" v-html="raw"></i>
+  <i class="svg-box" :style="style" v-html="icon"></i>
 </template>
 <style lang="scss" scoped>
 .svg-box {

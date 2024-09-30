@@ -1,18 +1,35 @@
 <script lang="ts" setup>
 import { marked } from "marked";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import menu from "./menu.json";
+import menu from "@/assets/json/menu.json";
 import { routerInfo } from "@/router";
+import VRouterLink from "@/components/VRouterLink.vue";
+import utils from "@/utils";
+import { MenuItemInfo } from "@/types/menu";
+
+const menuItemInfoList = utils.business.getMenuItemInfoList(menu);
 
 const route = useRoute();
 const router = useRouter();
 
-const dirIndex = route.params.dir_index;
-const fileIndex = route.params.file_index;
+let dirIndex = route.params.dir_index as string;
+let fileIndex = route.params.file_index as string;
 
 const markdownContent = ref<string>();
 const parsedMarkdown = ref<string>();
+
+const nextMenuItem = ref<MenuItemInfo | null>(null);
+
+function getNextMenuItem() {
+  const index = menuItemInfoList.findIndex(
+    (item) => item.dirIndex === dirIndex && item.fileIndex === fileIndex
+  );
+  if (index === -1 || index === menuItemInfoList.length - 1) {
+    return null;
+  }
+  return menuItemInfoList[index + 1];
+}
 
 async function loadMarkdownFile(filePath: string) {
   try {
@@ -24,26 +41,57 @@ async function loadMarkdownFile(filePath: string) {
     console.error("Failed to load markdown file:", error);
   }
 }
-onMounted(() => {
-  const dir = menu.find((item) => item.title.startsWith(dirIndex as string));
-  if (!dir) {
-    router.replace({ name: routerInfo.home.name });
-    return;
-  }
-  const filename = dir.links.find((item) =>
-    item.startsWith(fileIndex as string)
+
+function init() {
+  const currentDirIndexFileIndexObj = menuItemInfoList.find(
+    (item) => item.dirIndex === dirIndex && item.fileIndex === fileIndex
   );
-  if (!filename) {
+  if (!currentDirIndexFileIndexObj) {
     router.replace({ name: routerInfo.home.name });
-    return;
+    return null;
   }
-  loadMarkdownFile(`/documents/${dir.title}/${filename}`);
+  const { title, filename } = currentDirIndexFileIndexObj;
+  localStorage.setItem("prev-menu-item", filename);
+  loadMarkdownFile(`/documents/${title}/${filename}`);
+  nextMenuItem.value = getNextMenuItem();
+}
+
+onMounted(() => {
+  init();
 });
+
+watch(
+  () => route.fullPath,
+  () => {
+    dirIndex = route.params.dir_index as string;
+    fileIndex = route.params.file_index as string;
+    nextMenuItem.value = null;
+    markdownContent.value = undefined;
+    parsedMarkdown.value = undefined;
+    window.scrollTo(0, 0);
+
+    init();
+  }
+);
 </script>
 <template>
-  <section
-    class="max-w-[1024px] mx-auto px-2"
-    v-html="parsedMarkdown"
-  ></section>
+  <section class="max-w-[1024px] mx-auto px-3">
+    <article v-html="parsedMarkdown"></article>
+    <div class="flex justify-between items-center my-4">
+      <VRouterLink :to="{ name: routerInfo.home.name }">Home</VRouterLink>
+      <VRouterLink
+        v-if="nextMenuItem"
+        :to="{
+          name: routerInfo.detail.name,
+          params: {
+            dir_index: nextMenuItem.dirIndex,
+            file_index: nextMenuItem.fileIndex
+          }
+        }"
+      >
+        Next Page
+      </VRouterLink>
+    </div>
+  </section>
 </template>
 <style lang="scss" scoped></style>

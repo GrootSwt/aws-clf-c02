@@ -34,7 +34,7 @@ async function traverseDirectory(dirPath, result) {
 
 await traverseDirectory(publicDir, menu);
 
-const menuPath = join(__dirname, "../src/views/menu.json");
+const menuPath = join(__dirname, "../src/assets/json/menu.json");
 
 try {
   await access(menuPath);

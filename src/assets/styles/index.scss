@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --clr-primary: #60a5fa;
+  --clr-success: #4ade80;
+  --clr-warning: #fb923c;
+  --clr-danger: #dc2626;
+  --clr-disabled: #e5e7eb;
+  background-color: #f5f5f5;
+  color: #333333;
+  font-size: 16px;
+}
+body {
+  margin: 0;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+
+em > strong {
+  color: rgb(147 51 234);
+}
+
 // skeleton loading
 .skeleton-loader {
   position: relative;

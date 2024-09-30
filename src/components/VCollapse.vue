@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import VSvg from "./VSvg.vue";
+import VSvg from "./VIcon.vue";
 import IconUp from "@/assets/images/svgs/up.svg?raw";
 
 type Props = {
@@ -20,7 +20,7 @@ const open = ref(initStatus);
     >
       <span>{{ title }}</span>
       <VSvg
-        :raw="IconUp"
+        :icon="IconUp"
         :size="18"
         class="transition-all duration-300"
         :class="{ 'rotate-180': !open }"

@@ -7,6 +7,7 @@ import { routerInfo } from "@/router";
 import VRouterLink from "@/components/VRouterLink.vue";
 import utils from "@/utils";
 import { MenuItemInfo } from "@/types/menu";
+import VLoading from "@/components/VLoading.vue";
 
 const menuItemInfoList = utils.business.getMenuItemInfoList(menu);
 
@@ -76,22 +77,25 @@ watch(
 </script>
 <template>
   <section class="max-w-[1024px] mx-auto px-3">
-    <article v-html="parsedMarkdown"></article>
-    <div class="flex justify-between items-center my-4">
-      <VRouterLink :to="{ name: routerInfo.home.name }">Home</VRouterLink>
-      <VRouterLink
-        v-if="nextMenuItem"
-        :to="{
-          name: routerInfo.detail.name,
-          params: {
-            dir_index: nextMenuItem.dirIndex,
-            file_index: nextMenuItem.fileIndex
-          }
-        }"
-      >
-        Next Page
-      </VRouterLink>
-    </div>
+    <template v-if="parsedMarkdown">
+      <article v-html="parsedMarkdown"></article>
+      <div class="flex justify-between items-center my-4">
+        <VRouterLink :to="{ name: routerInfo.home.name }">Home</VRouterLink>
+        <VRouterLink
+          v-if="nextMenuItem"
+          :to="{
+            name: routerInfo.detail.name,
+            params: {
+              dir_index: nextMenuItem.dirIndex,
+              file_index: nextMenuItem.fileIndex
+            }
+          }"
+        >
+          Next Page
+        </VRouterLink>
+      </div>
+    </template>
+    <VLoading v-else :size="48" class="mt-8" />
   </section>
 </template>
 <style lang="scss" scoped></style>

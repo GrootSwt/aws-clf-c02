@@ -28,17 +28,17 @@ if (isPrevAccess) {
   <VRouterLink
     ref="navItemRef"
     v-bind="$props"
-    class="relative inline-block no-underline px-3 py-1 rounded text-gray-600"
+    class="relative inline-block no-underline px-3 py-1 rounded text-2a2a2a dark:text-f5f5f5"
     :class="{
-      'bg-green-400 bg-opacity-50': isPrevAccess,
-      'bg-sky-50': !isPrevAccess
+      'bg-green-400 dark:bg-blue-400 bg-opacity-50': isPrevAccess,
+      'bg-sky-50 dark:bg-slate-700': !isPrevAccess
     }"
   >
     <span>{{ name }}</span>
     <VSvg
       v-if="isPrevAccess"
       :icon="IconCurrent"
-      class="!absolute -top-2 -right-2 text-green-700"
+      class="!absolute -top-2 -right-2 text-green-700 dark:text-blue-700"
       :size="24"
     />
   </VRouterLink>

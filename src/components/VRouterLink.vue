@@ -8,10 +8,11 @@ defineProps<RouterLinkProps>();
     v-if="typeof to === 'string' && to.startsWith('http')"
     :href="to"
     target="_blank"
+    class="text-2a2a2a dark:text-f5f5f5"
   >
     <slot />
   </a>
-  <RouterLink v-else v-bind="$props">
+  <RouterLink v-else v-bind="$props" class="text-2a2a2a dark:text-f5f5f5">
     <slot />
   </RouterLink>
 </template>

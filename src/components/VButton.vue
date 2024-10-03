@@ -71,6 +71,11 @@ button {
   align-items: center;
   padding: 4px;
   height: calc(1em + 8px);
+  background-color: transparent;
+  color: var(--clr-dark);
+  @media (prefers-color-scheme: dark) {
+    color: var(--clr-white);
+  }
 }
 // circle
 .circle {

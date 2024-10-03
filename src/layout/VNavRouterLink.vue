@@ -1,28 +1,15 @@
 <script lang="ts" setup>
 import { RouterLinkProps } from "vue-router";
-import VRouterLink from "./VRouterLink.vue";
-import { nextTick, useTemplateRef } from "vue";
-import VSvg from "./VIcon.vue";
+import VRouterLink from "@/components/VRouterLink.vue";
+import VSvg from "@/components/VIcon.vue";
 import IconCurrent from "@/assets/images/svgs/current.svg?raw";
 
 const { name } = defineProps<
   RouterLinkProps & {
     name: string;
+    isActive?: boolean;
   }
 >();
-
-const navItemRef = useTemplateRef("navItemRef");
-const isPrevAccess = localStorage.getItem("prev-menu-item") === name;
-
-if (isPrevAccess) {
-  nextTick(() => {
-    if (navItemRef.value) {
-      (navItemRef.value.$el as HTMLAnchorElement).scrollIntoView({
-        block: "center"
-      });
-    }
-  });
-}
 </script>
 <template>
   <VRouterLink
@@ -30,13 +17,13 @@ if (isPrevAccess) {
     v-bind="$props"
     class="relative inline-block no-underline px-3 py-1 rounded text-2a2a2a dark:text-f5f5f5"
     :class="{
-      'bg-green-400 dark:bg-blue-400 bg-opacity-50': isPrevAccess,
-      'bg-sky-50 dark:bg-slate-700': !isPrevAccess
+      'bg-green-400 dark:bg-blue-400 bg-opacity-50': isActive,
+      'bg-sky-50 dark:bg-slate-700': !isActive
     }"
   >
     <span>{{ name }}</span>
     <VSvg
-      v-if="isPrevAccess"
+      v-if="isActive"
       :icon="IconCurrent"
       class="!absolute -top-2 -right-2 text-green-700 dark:text-blue-700"
       :size="24"

@@ -8,8 +8,14 @@ import VRouterLink from "@/components/VRouterLink.vue";
 import utils from "@/utils";
 import { MenuItemInfo } from "@/types/menu";
 import VLoading from "@/components/VLoading.vue";
+import VMenuDrawer from "@/layout/VMenuDrawer.vue";
+import { StorageSerializers, useLocalStorage } from "@vueuse/core";
 
 const menuItemInfoList = utils.business.getMenuItemInfoList(menu);
+
+const activeMenuInfo = useLocalStorage<MenuItemInfo>("active-menu-info", null, {
+  serializer: StorageSerializers.object
+});
 
 const route = useRoute();
 const router = useRouter();
@@ -44,15 +50,15 @@ async function loadMarkdownFile(filePath: string) {
 }
 
 function init() {
-  const currentDirIndexFileIndexObj = menuItemInfoList.find(
+  const currentMenuInfo = menuItemInfoList.find(
     (item) => item.dirIndex === dirIndex && item.fileIndex === fileIndex
   );
-  if (!currentDirIndexFileIndexObj) {
+  if (!currentMenuInfo) {
     router.replace({ name: routerInfo.home.name });
     return null;
   }
-  const { title, filename } = currentDirIndexFileIndexObj;
-  localStorage.setItem("prev-menu-item", filename);
+  const { title, filename } = currentMenuInfo;
+  activeMenuInfo.value = currentMenuInfo;
   loadMarkdownFile(`/documents/${title}/${filename}`);
   nextMenuItem.value = getNextMenuItem();
 }
@@ -96,6 +102,7 @@ watch(
       </div>
     </template>
     <VLoading v-else :size="48" class="mt-8" />
+    <VMenuDrawer />
   </section>
 </template>
 <style lang="scss" scoped></style>

@@ -1,6 +1,8 @@
 {
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "explicit",
-      "source.fixAll.eslint": "explicit"
-    }
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit"
   }
+}

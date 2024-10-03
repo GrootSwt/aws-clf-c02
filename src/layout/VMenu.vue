@@ -1,8 +1,31 @@
 <script lang="ts" setup>
-import VNavRouterLink from "@/components/VNavRouterLink.vue";
+import VNavRouterLink from "@/layout/VNavRouterLink.vue";
 import { routerInfo } from "@/router";
 import VCollapse from "@/components/VCollapse.vue";
 import menu from "@/assets/json/menu.json";
+import { StorageSerializers, useLocalStorage } from "@vueuse/core";
+import { nextTick, watch } from "vue";
+import { MenuItemInfo } from "@/types/menu";
+
+const activeMenuInfo = useLocalStorage<MenuItemInfo>("active-menu-info", null, {
+  serializer: StorageSerializers.object
+});
+
+watch(
+  () => activeMenuInfo.value,
+  (next) => {
+    if (next) {
+      nextTick(() => {
+        document
+          .querySelector(`#id_${next.dirIndex}_${next.fileIndex}`)
+          ?.scrollIntoView({ block: "center" });
+      });
+    }
+  },
+  {
+    immediate: true
+  }
+);
 </script>
 <template>
   <section class="max-w-[1024px] mx-auto flex flex-col gap-4 p-3">
@@ -20,6 +43,11 @@ import menu from "@/assets/json/menu.json";
               }
             }"
             :name="link"
+            :id="`id_${item.title.substring(0, 2)}_${link.substring(0, 2)}`"
+            :is-active="
+              activeMenuInfo?.dirIndex === item.title.substring(0, 2) &&
+              activeMenuInfo?.fileIndex === link.substring(0, 2)
+            "
           />
         </div>
       </VCollapse>

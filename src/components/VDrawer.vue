@@ -36,13 +36,23 @@ watch(
       :style="style"
     >
       <div
+        v-if="$device.isPC"
         class="sticky top-0 flex justify-end px-4 py-2 z-10 bg-gray-200 dark:bg-gray-900"
       >
-        <VButton :icon="IconClose" @click="visible = false" />
+        <VButton :icon="IconClose" @click="visible = !visible" />
       </div>
       <div>
         <slot></slot>
       </div>
+      <Teleport to="body">
+        <VButton
+          v-if="$device.isSP && visible"
+          :icon="IconClose"
+          size="large"
+          class="fixed left-0 top-1/2 !bg-gray-200 !bg-opacity-70 dark:!bg-gray-900 dark:!bg-opacity-70 !text-2a2a2a !text-opacity-70 dark:!text-f5f5f5 dark:!text-opacity-70 !h-12 rounded-r-lg shadow z-20"
+          @click="visible = !visible"
+        />
+      </Teleport>
     </section>
   </Teleport>
 </template>

@@ -8,5 +8,6 @@ import utils from "./utils";
 const app = createApp(App);
 app.use(router);
 app.directive("loading", loadingDirective);
+app.config.globalProperties.$device = utils.device.getDeviceInfo();
 app.config.globalProperties.$back = utils.navigator.back;
 app.mount("#app");

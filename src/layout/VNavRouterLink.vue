@@ -15,10 +15,10 @@ const { name } = defineProps<
   <VRouterLink
     ref="navItemRef"
     v-bind="$props"
-    class="relative inline-block no-underline px-3 py-1 rounded text-2a2a2a dark:text-f5f5f5"
+    class="relative inline-block no-underline px-3 py-1 rounded text-1c1c1c dark:text-f5f5f5 shadow"
     :class="{
       'bg-green-400 dark:bg-blue-400 bg-opacity-50': isActive,
-      'bg-sky-50 dark:bg-stone-700': !isActive
+      'bg-sky-50 dark:bg-stone-800': !isActive
     }"
   >
     <span>{{ name }}</span>

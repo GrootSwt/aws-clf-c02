@@ -85,7 +85,7 @@ watch(
   <section class="max-w-[1024px] mx-auto px-3">
     <template v-if="parsedMarkdown">
       <article v-html="parsedMarkdown"></article>
-      <div class="flex justify-between items-center my-4">
+      <div class="flex justify-between items-center my-8">
         <VRouterLink :to="{ name: routerInfo.home.name }">Home</VRouterLink>
         <VRouterLink
           v-if="nextMenuItem"

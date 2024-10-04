@@ -31,13 +31,13 @@ watch(
 <template>
   <Teleport to="body">
     <section
-      class="fixed inset-0 top-0 left-0 bg-f5f5f5 dark:bg-2a2a2a transition-all shadow z-10 overflow-y-auto"
+      class="fixed inset-0 top-0 left-0 bg-f5f5f5 dark:bg-1c1c1c transition-all shadow z-10 overflow-y-auto"
       :class="{ ' -translate-x-full': !visible, 'translate-x-0': visible }"
       :style="style"
     >
       <div
         v-if="$device.isPC"
-        class="sticky top-0 flex justify-end px-4 py-2 z-10 bg-gray-200 dark:bg-gray-900"
+        class="sticky top-0 flex justify-end px-4 py-2 z-10 bg-gray-200 dark:bg-neutral-800"
       >
         <VButton :icon="IconClose" @click="visible = !visible" />
       </div>
@@ -49,7 +49,7 @@ watch(
           v-if="$device.isSP && visible"
           :icon="IconClose"
           size="large"
-          class="fixed left-0 top-1/2 !bg-gray-200 !bg-opacity-70 dark:!bg-gray-900 dark:!bg-opacity-70 !text-2a2a2a !text-opacity-70 dark:!text-f5f5f5 dark:!text-opacity-70 !h-12 rounded-r-lg shadow z-20"
+          class="fixed left-0 top-1/2 !bg-gray-200 !bg-opacity-70 dark:!bg-neutral-800 dark:!bg-opacity-70 !text-1c1c1c !text-opacity-70 dark:!text-f5f5f5 dark:!text-opacity-70 !h-12 rounded-r-lg shadow z-20"
           @click="visible = !visible"
         />
       </Teleport>

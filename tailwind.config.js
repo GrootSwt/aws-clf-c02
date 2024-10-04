@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         f5f5f5: "#f5f5f5",
-        "2a2a2a": "#2a2a2a"
+        "1c1c1c": "#1c1c1c"
       }
     }
   },

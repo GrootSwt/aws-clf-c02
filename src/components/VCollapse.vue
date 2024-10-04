@@ -14,11 +14,11 @@ const open = ref(initStatus);
 </script>
 <template>
   <section
-    class="rounded-lg overflow-hidden bg-gray-200 dark:bg-neutral-800 shadow"
+    class="rounded-lg overflow-hidden bg-gray-100 dark:bg-neutral-900 shadow-md"
   >
     <button
       type="button"
-      class="flex justify-between items-center border-none w-full p-3 rounded-t-lg text-lg font-medium bg-gray-50 dark:bg-neutral-700 text-2a2a2a dark:text-f5f5f5"
+      class="flex justify-between items-center border-none w-full p-3 rounded-t-lg text-lg font-medium bg-gray-200 dark:bg-neutral-800 text-1c1c1c dark:text-f5f5f5"
       @click="open = !open"
     >
       <span>{{ title }}</span>

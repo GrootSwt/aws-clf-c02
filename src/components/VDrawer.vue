@@ -35,7 +35,9 @@ watch(
       :class="{ ' -translate-x-full': !visible, 'translate-x-0': visible }"
       :style="style"
     >
-      <div class="sticky top-0 flex justify-end px-4 py-2 z-10">
+      <div
+        class="sticky top-0 flex justify-end px-4 py-2 z-10 bg-gray-200 dark:bg-gray-900"
+      >
         <VButton :icon="IconClose" @click="visible = false" />
       </div>
       <div>

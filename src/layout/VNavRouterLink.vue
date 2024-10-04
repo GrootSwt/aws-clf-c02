@@ -18,7 +18,7 @@ const { name } = defineProps<
     class="relative inline-block no-underline px-3 py-1 rounded text-2a2a2a dark:text-f5f5f5"
     :class="{
       'bg-green-400 dark:bg-blue-400 bg-opacity-50': isActive,
-      'bg-sky-50 dark:bg-slate-700': !isActive
+      'bg-sky-50 dark:bg-stone-700': !isActive
     }"
   >
     <span>{{ name }}</span>

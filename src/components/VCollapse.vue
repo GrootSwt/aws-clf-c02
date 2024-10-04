@@ -13,10 +13,12 @@ const { initStatus = true } = defineProps<Props>();
 const open = ref(initStatus);
 </script>
 <template>
-  <section class="rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-800">
+  <section
+    class="rounded-lg overflow-hidden bg-gray-200 dark:bg-neutral-800 shadow"
+  >
     <button
       type="button"
-      class="flex justify-between items-center border-none w-full p-3 rounded-t-lg text-lg font-medium bg-gray-50 dark:bg-gray-700 text-2a2a2a dark:text-f5f5f5"
+      class="flex justify-between items-center border-none w-full p-3 rounded-t-lg text-lg font-medium bg-gray-50 dark:bg-neutral-700 text-2a2a2a dark:text-f5f5f5"
       @click="open = !open"
     >
       <span>{{ title }}</span>

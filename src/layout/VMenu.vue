@@ -42,7 +42,7 @@ watch(
                 file_index: link.substring(0, 2)
               }
             }"
-            :name="link"
+            :name="link.substring(3, link.length - 3)"
             :id="`id_${item.title.substring(0, 2)}_${link.substring(0, 2)}`"
             :is-active="
               activeMenuInfo?.dirIndex === item.title.substring(0, 2) &&

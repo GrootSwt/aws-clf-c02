@@ -8,16 +8,16 @@
   --clr-warning: #fb923c;
   --clr-danger: #dc2626;
   --clr-disabled: #e5e7eb;
-  --clr-dark: #2a2a2a;
+  --clr-black: #2a2a2a;
   --clr-white: #f5f5f5;
   background-color: var(--clr-white);
-  color: var(--clr-dark);
+  color: var(--clr-black);
   font-size: 16px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    background-color: var(--clr-dark);
+    background-color: var(--clr-black);
     color: var(--clr-white);
   }
 }
@@ -67,4 +67,11 @@ em > strong {
 
 .overflow-hidden {
   overflow: hidden !important;
+}
+
+button {
+  cursor: pointer;
+  &[hidden] {
+    cursor: not-allowed;
+  }
 }

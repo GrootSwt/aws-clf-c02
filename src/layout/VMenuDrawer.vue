@@ -20,7 +20,7 @@ watch(
   <VButton
     :icon="IconMenu"
     size="large"
-    class="fixed left-0 top-1/2 !bg-gray-200 !bg-opacity-70 dark:!bg-neutral-800 dark:!bg-opacity-70 !text-1c1c1c !text-opacity-70 dark:!text-f5f5f5 dark:!text-opacity-70 !h-12 rounded-r-lg shadow"
+    class="fixed left-0 top-1/2 !bg-gray-100 !bg-opacity-70 dark:!bg-neutral-800 dark:!bg-opacity-70 !text-1c1c1c !text-opacity-70 dark:!text-f5f5f5 dark:!text-opacity-70 !h-12 rounded-r-lg shadow"
     @click="visible = !visible"
   />
   <VDrawer v-model:visible="visible">

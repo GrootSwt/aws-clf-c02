@@ -21,9 +21,28 @@ watch(
   () => visible.value,
   (next) => {
     if (next) {
-      document.documentElement.classList.add("overflow-hidden");
+      const { scrollTop, scrollLeft } = document.documentElement;
+      document.documentElement.style.setProperty(
+        "--body-scroll-x",
+        `${-scrollLeft}px`
+      );
+      document.documentElement.style.setProperty(
+        "--body-scroll-y",
+        `${-scrollTop}px`
+      );
+      document.documentElement.classList.add("overflow-scroll-block");
     } else {
-      document.documentElement.classList.remove("overflow-hidden");
+      const bodyScrollX =
+        document.documentElement.style.getPropertyValue("--body-scroll-x");
+      const bodyScrollY =
+        document.documentElement.style.getPropertyValue("--body-scroll-y");
+      document.documentElement.classList.remove("overflow-scroll-block");
+      document.documentElement.style.removeProperty("--body-scroll-x");
+      document.documentElement.style.removeProperty("--body-scroll-y");
+      document.documentElement.scrollTo({
+        left: -bodyScrollX.substring(0, bodyScrollX.length - 2),
+        top: -bodyScrollY.substring(0, bodyScrollY.length - 2)
+      });
     }
   }
 );
@@ -37,7 +56,7 @@ watch(
     >
       <div
         v-if="$device.isPC"
-        class="sticky top-0 flex justify-end px-4 py-2 z-10 bg-gray-200 dark:bg-neutral-800"
+        class="sticky top-0 flex justify-end px-4 py-2 z-10 bg-gray-100 dark:bg-neutral-800"
       >
         <VButton :icon="IconClose" @click="visible = !visible" />
       </div>
@@ -49,7 +68,7 @@ watch(
           v-if="$device.isSP && visible"
           :icon="IconClose"
           size="large"
-          class="fixed left-0 top-1/2 !bg-gray-200 !bg-opacity-70 dark:!bg-neutral-800 dark:!bg-opacity-70 !text-1c1c1c !text-opacity-70 dark:!text-f5f5f5 dark:!text-opacity-70 !h-12 rounded-r-lg shadow z-20"
+          class="fixed left-0 top-1/2 !bg-gray-100 !bg-opacity-70 dark:!bg-neutral-800 dark:!bg-opacity-70 !text-1c1c1c !text-opacity-70 dark:!text-f5f5f5 dark:!text-opacity-70 !h-12 rounded-r-lg shadow z-20"
           @click="visible = !visible"
         />
       </Teleport>

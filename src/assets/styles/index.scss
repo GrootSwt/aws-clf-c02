@@ -69,6 +69,14 @@ em > strong {
   overflow: hidden !important;
 }
 
+.overflow-scroll-block {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: var(--body-scroll-y);
+  left: var(--body-scroll-x);
+}
+
 button {
   cursor: pointer;
   &[hidden] {

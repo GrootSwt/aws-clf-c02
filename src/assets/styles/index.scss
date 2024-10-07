@@ -38,8 +38,11 @@ pre {
   overflow-x: auto;
 }
 
-em > strong {
-  color: rgb(147 51 234);
+em {
+  font-style: normal;
+  & > strong {
+    color: #c084fc;
+  }
 }
 
 // skeleton loading

@@ -82,7 +82,7 @@ watch(
 );
 </script>
 <template>
-  <section class="max-w-[1024px] mx-auto px-3">
+  <section class="flex flex-col max-w-[1024px] mx-auto px-3">
     <template v-if="parsedMarkdown">
       <article v-html="parsedMarkdown"></article>
       <div class="flex justify-between items-center my-8">

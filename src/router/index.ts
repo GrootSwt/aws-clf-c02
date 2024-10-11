@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
-import DetailView from "@/views/DetailView.vue";
+import DetailView from "@/views/Detail/DetailView.vue";
 import NotFoundView from "@/views/error/NotFoundView.vue";
 
 export const routerInfo = {

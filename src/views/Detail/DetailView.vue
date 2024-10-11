@@ -7,9 +7,9 @@ import { routerInfo } from "@/router";
 import VRouterLink from "@/components/VRouterLink.vue";
 import utils from "@/utils";
 import { MenuItemInfo } from "@/types/menu";
-import VLoading from "@/components/VLoading.vue";
 import VMenuDrawer from "@/layout/VMenuDrawer.vue";
 import { StorageSerializers, useLocalStorage } from "@vueuse/core";
+import SkeletonLoader from "./components/SkeletonLoader.vue";
 
 const menuItemInfoList = utils.business.getMenuItemInfoList(menu);
 
@@ -86,7 +86,7 @@ watch(
     <template v-if="parsedMarkdown">
       <article v-html="parsedMarkdown"></article>
       <div class="flex justify-between items-center my-8">
-        <VRouterLink :to="{ name: routerInfo.home.name }">Home</VRouterLink>
+        <VRouterLink :to="{ name: routerInfo.home.name }">首页</VRouterLink>
         <VRouterLink
           v-if="nextMenuItem"
           :to="{
@@ -96,12 +96,13 @@ watch(
               file_index: nextMenuItem.fileIndex
             }
           }"
+          replace
         >
-          Next Page
+          下一页
         </VRouterLink>
       </div>
     </template>
-    <VLoading v-else :size="48" class="mt-8" />
+    <SkeletonLoader v-else />
     <VMenuDrawer />
   </section>
 </template>

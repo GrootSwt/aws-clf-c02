@@ -3,29 +3,13 @@ import VNavRouterLink from "@/layout/VNavRouterLink.vue";
 import { routerInfo } from "@/router";
 import VCollapse from "@/components/VCollapse.vue";
 import menu from "@/assets/json/menu.json";
-import { StorageSerializers, useLocalStorage } from "@vueuse/core";
-import { nextTick, watch } from "vue";
-import { MenuItemInfo } from "@/types/menu";
+import useActiveMenu from "@/hooks/useActiveMenu";
 
-const activeMenuInfo = useLocalStorage<MenuItemInfo>("active-menu-info", null, {
-  serializer: StorageSerializers.object
-});
+defineProps<{
+  replace?: boolean;
+}>();
 
-watch(
-  () => activeMenuInfo.value,
-  (next) => {
-    if (next) {
-      nextTick(() => {
-        document
-          .querySelector(`#id_${next.dirIndex}_${next.fileIndex}`)
-          ?.scrollIntoView({ block: "center" });
-      });
-    }
-  },
-  {
-    immediate: true
-  }
-);
+const { activeMenuInfo } = useActiveMenu();
 </script>
 <template>
   <section class="max-w-[1024px] mx-auto flex flex-col gap-4 p-3">
@@ -42,6 +26,7 @@ watch(
                 file_index: link.substring(0, 2)
               }
             }"
+            :replace="replace"
             :name="link.substring(3, link.length - 3)"
             :id="`id_${item.title.substring(0, 2)}_${link.substring(0, 2)}`"
             :is-active="

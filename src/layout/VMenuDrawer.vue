@@ -5,10 +5,21 @@ import VButton from "@/components/VButton.vue";
 import IconMenu from "@/assets/images/svgs/menu.svg?raw";
 import VMenu from "./VMenu.vue";
 import { useRoute } from "vue-router";
+import useActiveMenu from "@/hooks/useActiveMenu";
+
+const { moveActiveMenuToCenter } = useActiveMenu();
 
 const route = useRoute();
 const visible = ref(false);
 
+watch(
+  () => visible.value,
+  (next) => {
+    if (next) {
+      moveActiveMenuToCenter();
+    }
+  }
+);
 watch(
   () => route.fullPath,
   () => {
@@ -24,7 +35,7 @@ watch(
     @click="visible = !visible"
   />
   <VDrawer v-model:visible="visible">
-    <VMenu />
+    <VMenu replace />
   </VDrawer>
 </template>
 <style lang="scss" scoped></style>

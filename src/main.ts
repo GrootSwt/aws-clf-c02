@@ -4,6 +4,7 @@ import router from "./router";
 import loadingDirective from "./directives/Loading";
 import App from "./App.vue";
 import utils from "./utils";
+import "@/components/web/CustomArticle";
 
 const app = createApp(App);
 app.use(router);

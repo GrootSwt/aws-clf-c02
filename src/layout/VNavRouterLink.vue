@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { RouterLinkProps } from "vue-router";
-import VRouterLink from "@/components/VRouterLink.vue";
-import VSvg from "@/components/VIcon.vue";
+import VRouterLink from "@/components/common/VRouterLink.vue";
+import VSvg from "@/components/common/VIcon.vue";
 import IconCurrent from "@/assets/images/svgs/current.svg?raw";
 
 const { name } = defineProps<

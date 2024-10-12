@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, watch } from "vue";
-import VDrawer from "@/components/VDrawer.vue";
-import VButton from "@/components/VButton.vue";
+import VDrawer from "@/components/common/VDrawer.vue";
+import VButton from "@/components/common/VButton.vue";
 import IconMenu from "@/assets/images/svgs/menu.svg?raw";
 import VMenu from "./VMenu.vue";
 import { useRoute } from "vue-router";

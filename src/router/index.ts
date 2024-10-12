@@ -14,6 +14,11 @@ export const routerInfo = {
     name: "detail",
     path: "/detail/:dir_index/:file_index",
     component: DetailView
+  },
+  notFound: {
+    name: "notFound",
+    path: "/:pathMatch(.*)*",
+    component: NotFoundView
   }
 } as const;
 
@@ -21,11 +26,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/", redirect: { name: routerInfo.home.name } },
   { ...routerInfo.home },
   { ...routerInfo.detail },
-  {
-    name: "notFound",
-    path: "/:pathMatch(.*)*",
-    component: NotFoundView
-  }
+  { ...routerInfo.notFound }
 ];
 
 const router = createRouter({

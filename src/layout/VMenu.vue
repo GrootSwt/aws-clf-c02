@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import VNavRouterLink from "@/layout/VNavRouterLink.vue";
 import { routerInfo } from "@/router";
-import VCollapse from "@/components/VCollapse.vue";
+import VCollapse from "@/components/common/VCollapse.vue";
 import menu from "@/assets/json/menu.json";
 import useActiveMenu from "@/hooks/useActiveMenu";
 

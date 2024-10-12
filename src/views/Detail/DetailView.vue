@@ -4,7 +4,7 @@ import { onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import menu from "@/assets/json/menu.json";
 import { routerInfo } from "@/router";
-import VRouterLink from "@/components/VRouterLink.vue";
+import VRouterLink from "@/components/common/VRouterLink.vue";
 import utils from "@/utils";
 import { MenuItemInfo } from "@/types/menu";
 import VMenuDrawer from "@/layout/VMenuDrawer.vue";
@@ -23,8 +23,7 @@ const router = useRouter();
 let dirIndex = route.params.dir_index as string;
 let fileIndex = route.params.file_index as string;
 
-const markdownContent = ref<string>();
-const parsedMarkdown = ref<string>();
+const content = ref();
 
 const nextMenuItem = ref<MenuItemInfo | null>(null);
 
@@ -40,12 +39,12 @@ function getNextMenuItem() {
 
 async function loadMarkdownFile(filePath: string) {
   try {
+    content.value = undefined;
     const response = await fetch(filePath);
-    const markdown = await response.text();
-    markdownContent.value = markdown;
-    parsedMarkdown.value = await marked.parse(markdown);
+    content.value = await marked.parse(await response.text());
   } catch (error) {
     console.error("Failed to load markdown file:", error);
+    router.replace({ name: routerInfo.notFound.name });
   }
 }
 
@@ -72,9 +71,6 @@ watch(
   () => {
     dirIndex = route.params.dir_index as string;
     fileIndex = route.params.file_index as string;
-    nextMenuItem.value = null;
-    markdownContent.value = undefined;
-    parsedMarkdown.value = undefined;
     window.scrollTo(0, 0);
 
     init();
@@ -83,9 +79,11 @@ watch(
 </script>
 <template>
   <section class="flex flex-col max-w-[1024px] mx-auto px-3">
-    <template v-if="parsedMarkdown">
-      <article v-html="parsedMarkdown"></article>
-      <div class="flex justify-between items-center my-8">
+    <div v-show="content">
+      <custom-article :content="content" />
+      <div
+        class="flex justify-between items-center my-8 text-blue-400 underline"
+      >
         <VRouterLink :to="{ name: routerInfo.home.name }">首页</VRouterLink>
         <VRouterLink
           v-if="nextMenuItem"
@@ -101,8 +99,8 @@ watch(
           下一页
         </VRouterLink>
       </div>
-    </template>
-    <SkeletonLoader v-else />
+    </div>
+    <SkeletonLoader v-show="!content" />
     <VMenuDrawer />
   </section>
 </template>

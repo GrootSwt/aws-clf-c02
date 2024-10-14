@@ -8,7 +8,7 @@ class CustomArticle extends HTMLElement {
   connectedCallback() {
     const shadow = this.attachShadow({ mode: "open" });
     const style = document.createElement("style");
-    style.textContent = /* css */ `
+    const originStyleContent = /* css */ `
       pre {
         overflow-x: auto;
       }
@@ -18,15 +18,42 @@ class CustomArticle extends HTMLElement {
       em > strong {
         color: #c084fc;
       }
-    `.replace(/\s/g, "");
+      table {
+        border-collapse: collapse;
+      }
+      th, td {
+        border: 1px, solid, #1c1c1c;
+      }
+      @media (prefers-color-scheme: dark) {
+        th, td {
+          border-color: #f5f5f5;
+        }
+      }
+    `;
+    const compressedStyleContent = originStyleContent
+      .replace(/\s+/g, " ")
+      .replace(/^\s+|\s+$/g, "")
+      .replace(/;\s*}/g, "}")
+      .replace(/:\s+/g, ":")
+      .replace(/\s*{\s*/g, "{")
+      .replace(/\s*}\s*/g, "}")
+      .replace(/\s*,\s*/g, ",");
+    style.textContent = compressedStyleContent;
+
     shadow.appendChild(style);
     const article = document.createElement("article");
     article.id = "article";
     shadow.appendChild(article);
   }
-  attributeChangedCallback(_name: string, _oldValue: string, newValue: string) {
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (
+      !CustomArticle.observedAttributes.includes(name) ||
+      oldValue === newValue
+    ) {
+      return;
+    }
+
     const articleEl = this.shadowRoot?.querySelector("#article");
-    console.log(articleEl);
     if (articleEl) {
       articleEl.innerHTML = newValue;
     }

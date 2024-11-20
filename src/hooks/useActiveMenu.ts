@@ -11,6 +11,9 @@ function useActiveMenu() {
   );
 
   function moveActiveMenuToCenter() {
+    if (!activeMenuInfo.value) {
+      return;
+    }
     const { dirIndex, fileIndex } = activeMenuInfo.value;
     document
       .querySelector(`#id_${dirIndex}_${fileIndex}`)

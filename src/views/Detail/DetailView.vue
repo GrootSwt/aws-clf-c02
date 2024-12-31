@@ -58,7 +58,9 @@ function init() {
   }
   const { title, filename } = currentMenuInfo;
   activeMenuInfo.value = currentMenuInfo;
-  loadMarkdownFile(`/documents/${title}/${filename}`);
+  loadMarkdownFile(
+    `${import.meta.env.BASE_URL}/documents/${title}/${filename}`
+  );
   nextMenuItem.value = getNextMenuItem();
 }
 

@@ -8,7 +8,8 @@
     "build": "node backend/genMenu.js && vue-tsc -b && vite build",
     "build:local": "yarn build && rm -rf /Users/swt/Dev/Softwares/docker/nginx/html/aws-clf-c02/* && cp -r ./dist/* /Users/swt/Dev/Softwares/docker/nginx/html/aws-clf-c02/",
     "preview": "vite preview",
-    "gen-menu": "node backend/genMenu.js"
+    "gen-menu": "node backend/genMenu.js",
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
     "@vueuse/core": "^11.1.0",
@@ -24,10 +25,10 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.28.0",
-    "gh-pages": "^6.2.0",
     "globals": "^15.9.0",
     "postcss": "^8.4.45",
     "prettier": "^3.3.3",
+    "push-dir": "^0.4.1",
     "sass": "^1.78.0",
     "tailwindcss": "^3.4.10",
     "typescript": "^5.5.3",
